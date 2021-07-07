@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 module gin-shop
 
 go 1.14
@@ -13,3 +14,10 @@ require (
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
 	golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c // indirect
 )
+=======
+module go-shop
+
+go 1.14
+
+require github.com/gin-gonic/gin v1.7.2
+>>>>>>> 9bc18f00e6cafb9f6ac7891e3e58d4d61fbaa9e0
