@@ -8,6 +8,10 @@ import (
 	"strconv"
 )
 
+func LoginIndex(c *gin.Context) {
+	c.HTML(http.StatusOK, "user/login", nil)
+}
+
 // @Summary 登录
 // @Description 账号密码登录
 // @Tags 用户信息   //swagger API分类标签, 同一个tag为一组
