@@ -8,8 +8,8 @@ import (
 
 type UserCart struct {
 	CartId     int   `gorm:"primaryKey;Column:cart_id"`
-	UserId     int   `gorm:"Column:user_id"`
-	GoodsId    int   `gorm:"Column:goods_id"`
+	UserId     int   `gorm:"Column:user_id" binding:"required" `
+	GoodsId    int   `gorm:"Column:goods_id" binding:"required"`
 	CreatedAt  int64 `gorm:"Column:created_at"`
 	UpdatedAt  int64 `gorm:"Column:updated_at"`
 	DeleteTime int64 `gorm:"Column:delete_time"`
@@ -35,5 +35,10 @@ func AddCart(userIdStr, goodsIdstr string) error {
 		UpdatedAt:  time.Now().Unix(),
 		DeleteTime: 0,
 	}).Error
+	return err
+}
+
+func DeleteCart(userId, goodsId int) error {
+	err := dao.DB.Where("user_id = ? and goods_id = ?", userId, goodsId).Error
 	return err
 }

@@ -20,3 +20,18 @@ func AddGoodsToCart(c *gin.Context) {
 func GetCartList(c *gin.Context) {
 
 }
+
+func DelGoodsFromCart(c *gin.Context) {
+	var cart models.UserCart
+	if err := c.ShouldBind(&cart); err != nil {
+		lib.Error(c, 404, err.Error())
+	} else {
+		err := models.DeleteCart(cart.UserId, cart.GoodsId)
+		if err != nil {
+			lib.Error(c, 404, err.Error())
+		} else {
+			lib.Success(c, "")
+		}
+	}
+
+}
