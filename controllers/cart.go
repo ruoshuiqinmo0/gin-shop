@@ -12,6 +12,7 @@ func AddGoodsToCart(c *gin.Context) {
 	err := models.AddCart(userId, GoodsId)
 	if err != nil {
 		lib.Error(c, 404, err.Error())
+	} else {
+		lib.Success(c, nil)
 	}
-	lib.Success(c, nil)
 }

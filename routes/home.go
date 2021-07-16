@@ -49,6 +49,8 @@ func HomeRoute(r *gin.Engine) {
 		v1Group.GET("/register", controllers.Register)
 		v1Group.GET("/delete", controllers.Delete)
 		v1Group.GET("/goodsDetail", controllers.GetGoodsDetail)
+		v1Group.GET("/goodsList", controllers.GetGoodsPageList)
+		v1Group.GET("/addCart", controllers.AddGoodsToCart)
 		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
 }

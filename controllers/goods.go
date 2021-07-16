@@ -4,6 +4,7 @@ import (
 	"gin-shop/lib"
 	"gin-shop/models"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"strconv"
 )
 
@@ -19,4 +20,21 @@ func GetGoodsDetail(c *gin.Context) {
 	} else {
 		lib.Success(c, Goods)
 	}
+}
+
+func GetGoodsPageList(c *gin.Context) {
+	pageStr := c.DefaultQuery("page", "1")
+	page, _ := strconv.Atoi(pageStr)
+	pageSizeStr := c.DefaultQuery("page_size", "15")
+	pageSize, _ := strconv.Atoi(pageSizeStr)
+	list, err := models.GetListGoods(page, pageSize)
+	if err != nil {
+		lib.Error(c, 404, err.Error())
+	} else {
+		lib.Success(c, list)
+	}
+}
+
+func Test(c *gin.Context) {
+	c.JSON(http.StatusOK)
 }

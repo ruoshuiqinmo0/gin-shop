@@ -5,7 +5,7 @@ import (
 )
 
 type Goods struct {
-	GoodsId        int     `gorm:"Column:primaryKey"`
+	GoodsId        int     `gorm:"Column:goods_id;primaryKey"`
 	GoodsName      string  `grom:"Column:goods_name"`
 	GoodsPrice     float64 `grom:"Column:goods_price"`
 	GoodsNumber    int     `grom:"Column:goods_number"`
@@ -53,4 +53,24 @@ func GetGoodsDetail(id int) (goodsDetail GoodsDetail, err error) {
 		Goods:     goods,
 		GoodsAttr: attr,
 	}, nil
+}
+
+func GetListGoods(page int, pageSize int) ([]GoodsDetail, error) {
+	offset := (page - 1) * pageSize
+	var goods []Goods
+	err := dao.DB.Offset(offset).Limit(pageSize).Find(&goods).Error
+	if err != nil {
+		return nil, err
+	}
+	list := make([]GoodsDetail, pageSize)
+	for key, val := range goods {
+		list[key] = GoodsDetail{
+			Goods: val,
+		}
+		err := dao.DB.Where("goods_id = ?", val.GoodsId).Find(&(list[key].GoodsAttr)).Error
+		if err != nil {
+			return nil, err
+		}
+	}
+	return list, err
 }

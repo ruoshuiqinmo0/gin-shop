@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-type Cart struct {
-	CartId     int   `gorm:"primaryKey;Column:goods_id"`
+type UserCart struct {
+	CartId     int   `gorm:"primaryKey;Column:cart_id"`
 	UserId     int   `gorm:"Column:user_id"`
 	GoodsId    int   `gorm:"Column:goods_id"`
 	CreatedAt  int64 `gorm:"Column:created_at"`
@@ -19,7 +19,7 @@ func AddCart(userIdStr, goodsIdstr string) error {
 	userId, _ := strconv.Atoi(userIdStr)
 	goodsId, _ := strconv.Atoi(goodsIdstr)
 	var user User
-	err := dao.DB.Where("id= ?", userId).First(&user).Error
+	err := dao.DB.Where("user_id= ?", userId).First(&user).Error
 	if err != nil {
 		return err
 	}
@@ -28,12 +28,12 @@ func AddCart(userIdStr, goodsIdstr string) error {
 	if err != nil {
 		return err
 	}
-	dao.DB.Create(&Cart{
+	err = dao.DB.Create(&UserCart{
 		UserId:     userId,
 		GoodsId:    goodsId,
 		CreatedAt:  0,
 		UpdatedAt:  time.Now().Unix(),
 		DeleteTime: 0,
-	})
-	return nil
+	}).Error
+	return err
 }
