@@ -51,6 +51,10 @@ func HomeRoute(r *gin.Engine) {
 		v1Group.GET("/goodsDetail", controllers.GetGoodsDetail)
 		v1Group.GET("/goodsList", controllers.GetGoodsPageList)
 		v1Group.GET("/addCart", controllers.AddGoodsToCart)
+		v1Group.GET("/captcha", controllers.Captcha)
+		v1Group.GET("/captcha/:captchaId", controllers.CaptchaImg)
+		v1Group.GET("/captchas/:captchaId/:value", controllers.CaptchaVerify)
+
 		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
 }

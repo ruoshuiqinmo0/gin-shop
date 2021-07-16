@@ -6,6 +6,7 @@ require (
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/cosmtrek/air v1.27.3 // indirect
 	github.com/creack/pty v1.1.13 // indirect
+	github.com/dchest/captcha v0.0.0-20200903113550-03f5f0333e1f
 	github.com/fatih/color v1.12.0 // indirect
 	github.com/gin-gonic/gin v1.7.2
 	github.com/jinzhu/gorm v1.9.16

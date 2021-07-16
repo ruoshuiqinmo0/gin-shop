@@ -4,7 +4,6 @@ import (
 	"gin-shop/lib"
 	"gin-shop/models"
 	"github.com/gin-gonic/gin"
-	"net/http"
 	"strconv"
 )
 
@@ -33,8 +32,4 @@ func GetGoodsPageList(c *gin.Context) {
 	} else {
 		lib.Success(c, list)
 	}
-}
-
-func Test(c *gin.Context) {
-	c.JSON(http.StatusOK)
 }

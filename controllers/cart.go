@@ -16,3 +16,7 @@ func AddGoodsToCart(c *gin.Context) {
 		lib.Success(c, nil)
 	}
 }
+
+func GetCartList(c *gin.Context) {
+
+}
