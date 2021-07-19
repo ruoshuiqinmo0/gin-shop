@@ -4,6 +4,7 @@ import (
 	"gin-shop/lib"
 	"gin-shop/models"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"net/http"
 	"strconv"
 )
@@ -26,21 +27,32 @@ func Login(c *gin.Context) {
 	var User models.User
 	if err := c.ShouldBind(&User); err != nil {
 		lib.Error(c, 404, err.Error())
+		return
 	}
 	user, err := models.FindUser(User.Username, User.Password)
 	if err != nil {
 		lib.Error(c, 404, err.Error())
 	} else {
-		c.SetCookie("user", string(user.UserId), 2*3600, "/", "localhost", false, true)
+		//c.SetCookie("user", string(user.UserId), 2*3600, "/", "localhost", false, true)
 		//c.JSON(http.StatusOK, gin.H{"code":200,"msg":"success","data":user})
-		lib.Success(c, User)
+		token, err := lib.GenToken(user.Username)
+		if err != nil {
+			lib.Error(c, 404, err.Error())
+		}
+		lib.Success(c, token)
 	}
 }
 
 func Register(c *gin.Context) {
 	var user models.User
 	if err := c.ShouldBind(&user); err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"err": err.Error()})
+		errs, ok := err.(validator.ValidationErrors)
+		if !ok {
+			lib.Error(c, 404, errs.Error())
+			return
+		}
+		lib.Error(c, 404, errs.Translate(lib.Trans))
+		return
 	}
 	id, err := models.Create(user)
 	if err != nil {

@@ -2,6 +2,7 @@ package routes
 
 import (
 	"gin-shop/controllers"
+	"gin-shop/middle"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -41,12 +42,14 @@ func LoginCheck() gin.HandlerFunc {
 // @BasePath
 func HomeRoute(r *gin.Engine) {
 	r.LoadHTMLGlob("views/Home/**/*")
+
+	r.GET("/login", controllers.LoginIndex)
+	r.POST("/login", controllers.Login)
 	v1Group := r.Group("v1")
-	v1Group.Use(LoginCheck())
+	v1Group.Use(middle.JWT())
 	{
 		//登录 注册
-		v1Group.GET("/login", controllers.LoginIndex)
-		v1Group.POST("/login", controllers.Login)
+
 		v1Group.GET("/register", controllers.Register)
 		//商品
 		v1Group.GET("/delete", controllers.Delete)
