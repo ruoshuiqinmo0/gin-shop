@@ -54,11 +54,11 @@ func Delete(c *gin.Context) {
 	idString := c.DefaultQuery("id", "0")
 	id, _ := strconv.Atoi(idString)
 	if id == 0 {
-		c.JSON(http.StatusNotFound, gin.H{"err": "id is null"})
+		lib.Error(c, 404, "id is null")
 	}
 	err := models.DeleteUser(id)
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"err": err.Error()})
+		lib.Error(c, 404, err.Error())
 	}
-	c.JSON(http.StatusOK, gin.H{"err": "success"})
+	lib.Success(c, "")
 }

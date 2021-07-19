@@ -44,14 +44,18 @@ func HomeRoute(r *gin.Engine) {
 	v1Group := r.Group("v1")
 	v1Group.Use(LoginCheck())
 	{
+		//登录 注册
 		v1Group.GET("/login", controllers.LoginIndex)
 		v1Group.POST("/login", controllers.Login)
 		v1Group.GET("/register", controllers.Register)
+		//商品
 		v1Group.GET("/delete", controllers.Delete)
 		v1Group.GET("/goodsDetail", controllers.GetGoodsDetail)
 		v1Group.GET("/goodsList", controllers.GetGoodsPageList)
+		//购物车
 		v1Group.GET("/addCart", controllers.AddGoodsToCart)
 		v1Group.GET("/delCart", controllers.DelGoodsFromCart)
+		v1Group.GET("/cartList", controllers.GetCartList)
 		//验证码
 		v1Group.GET("/captcha", controllers.Captcha)
 		v1Group.GET("/captcha/:captchaId", controllers.CaptchaImg)

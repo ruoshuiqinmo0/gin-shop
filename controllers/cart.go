@@ -18,7 +18,15 @@ func AddGoodsToCart(c *gin.Context) {
 }
 
 func GetCartList(c *gin.Context) {
-
+	page := c.DefaultQuery("page", "1")
+	pageSize := c.DefaultQuery("page_size", "15")
+	userId := c.Query("user_id")
+	list, err := models.PageList(page, pageSize, userId)
+	if err != nil {
+		lib.Error(c, 404, err.Error())
+	} else {
+		lib.Success(c, list)
+	}
 }
 
 func DelGoodsFromCart(c *gin.Context) {
