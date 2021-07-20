@@ -28,7 +28,6 @@ func GenToken(username string) (string, error) {
 }
 
 func ParseToken(tokenString string) (*MyClaims, error) {
-
 	token, err := jwt.ParseWithClaims(tokenString, &MyClaims{}, func(token *jwt.Token) (i interface{}, err error) {
 		return MySecret, nil
 	})
@@ -36,6 +35,9 @@ func ParseToken(tokenString string) (*MyClaims, error) {
 		return nil, err
 	}
 	if claims, ok := token.Claims.(*MyClaims); ok && token.Valid {
+		if time.Now().Unix() >= claims.ExpiresAt {
+			return nil, errors.New("token Expired")
+		}
 		return claims, nil
 	}
 	return nil, errors.New("invalid token")

@@ -15,7 +15,7 @@ func JWT() gin.HandlerFunc {
 		}
 		_, err := lib.ParseToken(token)
 		if err != nil {
-			lib.Error(c, 404, err)
+			lib.Error(c, 404, err.Error())
 			c.Abort()
 		}
 		c.Next()

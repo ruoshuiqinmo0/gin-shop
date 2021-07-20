@@ -42,15 +42,13 @@ func LoginCheck() gin.HandlerFunc {
 // @BasePath
 func HomeRoute(r *gin.Engine) {
 	r.LoadHTMLGlob("views/Home/**/*")
-
+	//登录 注册
 	r.GET("/login", controllers.LoginIndex)
 	r.POST("/login", controllers.Login)
+	r.GET("/register", controllers.Register)
 	v1Group := r.Group("v1")
 	v1Group.Use(middle.JWT())
 	{
-		//登录 注册
-
-		v1Group.GET("/register", controllers.Register)
 		//商品
 		v1Group.GET("/delete", controllers.Delete)
 		v1Group.GET("/goodsDetail", controllers.GetGoodsDetail)
@@ -63,6 +61,9 @@ func HomeRoute(r *gin.Engine) {
 		v1Group.GET("/captcha", controllers.Captcha)
 		v1Group.GET("/captcha/:captchaId", controllers.CaptchaImg)
 		v1Group.GET("/captchas/:captchaId/:value", controllers.CaptchaVerify)
+
+		//上传图片
+		v1Group.GET("/loadImg", controllers.LoadImg)
 
 		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}

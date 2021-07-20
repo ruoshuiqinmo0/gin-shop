@@ -1,5 +1,6 @@
 package controllers
 
+import "C"
 import (
 	"gin-shop/lib"
 	"gin-shop/models"
@@ -23,6 +24,7 @@ func GetGoodsDetail(c *gin.Context) {
 
 func GetGoodsPageList(c *gin.Context) {
 	pageStr := c.DefaultQuery("page", "1")
+
 	page, _ := strconv.Atoi(pageStr)
 	pageSizeStr := c.DefaultQuery("page_size", "15")
 	pageSize, _ := strconv.Atoi(pageSizeStr)
@@ -32,4 +34,16 @@ func GetGoodsPageList(c *gin.Context) {
 	} else {
 		lib.Success(c, list)
 	}
+}
+
+func LoadImg(c *gin.Context) {
+	file, err := c.FormFile("file")
+	if err != nil {
+		lib.Error(c, 404, "Not Found File")
+		return
+	}
+	if err := c.SaveUploadedFile(file, file.Filename); err != nil {
+		lib.Error(c, 404, err.Error())
+	}
+	lib.Success(c, map[string]string{"file": file.Filename})
 }

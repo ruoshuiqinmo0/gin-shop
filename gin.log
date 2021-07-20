@@ -1,0 +1,27 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] Loaded HTML Templates (5): 
+	- user/login
+	- 
+	- header.html
+	- layout/header
+	- login.html
+
+[GIN-debug] GET    /login                    --> gin-shop/controllers.LoginIndex (3 handlers)
+[GIN-debug] POST   /login                    --> gin-shop/controllers.Login (3 handlers)
+[GIN-debug] GET    /register                 --> gin-shop/controllers.Register (3 handlers)
+[GIN-debug] GET    /v1/delete                --> gin-shop/controllers.Delete (4 handlers)
+[GIN-debug] GET    /v1/goodsDetail           --> gin-shop/controllers.GetGoodsDetail (4 handlers)
+[GIN-debug] GET    /v1/goodsList             --> gin-shop/controllers.GetGoodsPageList (4 handlers)
+[GIN-debug] GET    /v1/addCart               --> gin-shop/controllers.AddGoodsToCart (4 handlers)
+[GIN-debug] GET    /v1/delCart               --> gin-shop/controllers.DelGoodsFromCart (4 handlers)
+[GIN-debug] GET    /v1/cartList              --> gin-shop/controllers.GetCartList (4 handlers)
+[GIN-debug] GET    /v1/captcha               --> gin-shop/controllers.Captcha (4 handlers)
+[GIN-debug] GET    /v1/captcha/:captchaId    --> gin-shop/controllers.CaptchaImg (4 handlers)
+[GIN-debug] GET    /v1/captchas/:captchaId/:value --> gin-shop/controllers.CaptchaVerify (4 handlers)
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
