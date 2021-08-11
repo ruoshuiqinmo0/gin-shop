@@ -42,6 +42,7 @@ func LoginCheck() gin.HandlerFunc {
 // @BasePath
 func HomeRoute(r *gin.Engine) {
 	r.LoadHTMLGlob("views/Home/**/*")
+	r.Static("/static", "./static") //定义静态文件路径
 	//登录 注册
 	r.GET("/login", controllers.LoginIndex)
 	r.POST("/login", controllers.Login)

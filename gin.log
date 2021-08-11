@@ -11,6 +11,8 @@
 	- layout/header
 	- login.html
 
+[GIN-debug] GET    /static/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
+[GIN-debug] HEAD   /static/*filepath         --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (3 handlers)
 [GIN-debug] GET    /login                    --> gin-shop/controllers.LoginIndex (3 handlers)
 [GIN-debug] POST   /login                    --> gin-shop/controllers.Login (3 handlers)
 [GIN-debug] GET    /register                 --> gin-shop/controllers.Register (3 handlers)
@@ -23,5 +25,6 @@
 [GIN-debug] GET    /v1/captcha               --> gin-shop/controllers.Captcha (4 handlers)
 [GIN-debug] GET    /v1/captcha/:captchaId    --> gin-shop/controllers.CaptchaImg (4 handlers)
 [GIN-debug] GET    /v1/captchas/:captchaId/:value --> gin-shop/controllers.CaptchaVerify (4 handlers)
+[GIN-debug] GET    /v1/loadImg               --> gin-shop/controllers.LoadImg (4 handlers)
 [GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
 [GIN-debug] Listening and serving HTTP on :8080
